@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        function computerPlay() {
+            let result = Math.floor(Math.random() * Math.floor(3));
+            if (result === 0) return "Rock";
+            else return (result === 1) ? "Paper" : "Scissors";
+        }
+    </script>
+</body>
+</html>
