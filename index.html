@@ -14,6 +14,19 @@
             if (result === 0) return "Rock";
             else return (result === 1) ? "Paper" : "Scissors";
         }
+        function playRound(playerSelection, computerSelection) {
+            let winningMessage = "You won!, " + playerSelection + " beats " + computerSelection + " !";
+            let losingMessage = "You lost!, " + computerSelection + " beats " + playerSelection+ " !";
+            if (playerSelection === computerSelection)
+                return "Draw !";
+            else if ((playerSelection === "Rock" && computerSelection === "Scissors") || (playerSelection === "Paper" && computerSelection === "Rock") || (playerSelection === "Scissors" && computerSelection === "Paper"))
+                return winningMessage;
+            else 
+                return losingMessage;
+        }
+            const playerSelection = "Rock";
+            const computerSelection = computerPlay();
+            console.log(playRound(playerSelection, computerSelection));
     </script>
 </body>
 </html>
