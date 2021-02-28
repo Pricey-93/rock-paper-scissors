@@ -1,6 +1,8 @@
 "use strict"
 let playerScore = 0;
 let computerScore = 0;
+let computerSelection;
+let playerSelection;
 
 function computerPlay() {
     let result = Math.floor(Math.random() * Math.floor(3));
@@ -25,23 +27,31 @@ function playRound(playerSelection, computerSelection) {
         document.getElementById("computer-score").textContent = computerScore;
         return losingMessage;
 }
-function game() {
-    let computerSelection;
-    let playerSelection;
-    const items = document.querySelectorAll(".weapon-selection");
-    items.forEach(item => {
-        item.addEventListener("click", (e) => {
-            console.log(e.target);
-            var temp = item.textContent;
-            playerSelection = temp.toLocaleLowerCase();
-            console.log(playerSelection);
-            computerSelection = computerPlay();
-            console.log(computerSelection);
-            document.getElementById("result-text").textContent = playRound(playerSelection, computerSelection);
-        })
+function addGlobalEventListener(type, selector, callback) {
+    document.addEventListener(type, e => {
+        if (e.target.matches(selector)) callback(e);
     })
 }
+function gameOver() {
+    return (playerScore > computerScore) ? "You won the game!" : "You lost the game!";
+}
+function reset() {
+    playerScore = 0;
+    computerScore = 0;
+    document.getElementById("player-score").textContent = playerScore;
+    document.getElementById("computer-score").textContent = computerScore;
+}
+function game() {
+    let handler = function (e) {
+        console.log(e.target);
+        playerSelection = e.target.textContent.toLocaleLowerCase();
+        computerSelection = computerPlay();
+        document.getElementById("result-text").textContent = playRound(playerSelection, computerSelection);
+        if (playerScore === 5 || computerScore === 5) {
+            document.getElementById("result-text").textContent = gameOver();
+            reset();
+        }
+    }
+    addGlobalEventListener("click", ".weapon-selection", handler);
+}
 game();
-
-
-
