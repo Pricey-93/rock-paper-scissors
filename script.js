@@ -48,7 +48,7 @@ function game() {
         computerSelection = computerPlay();
         document.getElementById("result-text").textContent = playRound(playerSelection, computerSelection);
         if (playerScore === 5 || computerScore === 5) {
-            document.getElementById("result-text").textContent = gameOver();
+            alert(gameOver());
             reset();
         }
     }
